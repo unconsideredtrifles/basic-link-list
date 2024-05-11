@@ -10,8 +10,8 @@ class LinkList {
   #verifyNode(node) {
     if (
         node != null 
-        && !hasOwnProp(node, 'next')
-        && !hasOwnProp(node, 'value')
+        && ( !hasOwnProp(node, 'next')
+        || !hasOwnProp(node, 'value') )
       ) {
       throw Error('Invalid node input inside LinkList constructor');
     }
