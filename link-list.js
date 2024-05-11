@@ -7,6 +7,17 @@ class LinkList {
     this.head = head;
   }
 
+  get size() {
+    let itemCount = 0;
+    let currentNode = this.head;
+    while(currentNode != null) {
+      this.#verifyNode(currentNode);
+      itemCount += 1;
+      currentNode = currentNode.next;
+    }
+    return itemCount;
+  }
+
   #verifyNode(node) {
     if (
         node != null 
@@ -63,11 +74,13 @@ const test = function test() {
   linkList.append("banana");
   linkList.append("lemon");
   printLinkList(linkList);
+  console.log(linkList.size);
   console.log('');
   linkList.prepend("strawberry");
   linkList.prepend("blueberry");
   linkList.prepend("cranberry");
   printLinkList(linkList);
+  console.log(linkList.size);
 }
 
 
