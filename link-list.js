@@ -13,7 +13,7 @@ class LinkList {
   get size() {
     let itemCount = 0;
     let currentNode = this.head;
-    while(currentNode != null) {
+    while(currentNode !== null) {
       this.#verifyNode(currentNode);
       itemCount += 1;
       currentNode = currentNode.next;
@@ -36,7 +36,7 @@ class LinkList {
     }
 
     let currentNode = this.head;
-    while (currentNode.next != null) {
+    while (currentNode.next !== null) {
       currentNode = currentNode.next;
       this.#verifyNode(currentNode);
     }
@@ -50,7 +50,7 @@ class LinkList {
 
   #verifyNode(node) {
     if (
-        node != null 
+        node !== null 
         && ( !hasOwnProp(node, 'next')
         || !hasOwnProp(node, 'value') )
       ) {
@@ -66,7 +66,7 @@ class LinkList {
     let currentIndex = 0;
     let currentNode = this.head;
 
-    while (currentNode != null) {
+    while (currentNode !== null) {
       this.#verifyNode(currentNode);
       if (currentIndex === index) {
         return currentNode;
@@ -85,7 +85,7 @@ class LinkList {
     }
 
     let currentNode = this.head;
-    while (currentNode.next != null) {
+    while (currentNode.next !== null) {
       currentNode = currentNode.next;
       this.#verifyNode(currentNode);
     }
@@ -111,7 +111,7 @@ class Node {
 
 const printLinkList = function printLinkList(linkList) {
   let currentNode = linkList.head;
-  while (currentNode != null) {
+  while (currentNode !== null) {
     console.log(currentNode.value);
     currentNode = currentNode.next;
   }
