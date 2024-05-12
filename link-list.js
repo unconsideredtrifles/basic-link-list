@@ -1,10 +1,13 @@
-import hasOwnProp from './util/helpers.js';
+import { hasOwnProp, noop } from './util/helpers.js';
 
 
 class LinkList {
+  #tail;
+
   constructor(head = null) {
     this.#verifyNode(head);
     this.head = head;
+    this.#initTail();
   }
 
   get size() {
@@ -18,6 +21,33 @@ class LinkList {
     return itemCount;
   }
 
+  get tail() {
+    return this.#tail;
+  }
+
+  set tail(value) {
+    noop();
+  }
+
+  #initTail() {
+    if (this.head === null) {
+      this.#tail = null;
+      return;
+    }
+
+    let currentNode = this.head;
+    while (currentNode.next != null) {
+      currentNode = currentNode.next;
+      this.#verifyNode(currentNode);
+    }
+    this.#tail = currentNode;
+  }
+
+  #updateTail(node) {
+    this.#verifyNode(node);
+    this.#tail = node;
+  }
+
   #verifyNode(node) {
     if (
         node != null 
@@ -26,6 +56,26 @@ class LinkList {
       ) {
       throw Error('Invalid node input inside LinkList constructor');
     }
+  }
+
+  at(index) {
+    if (index < 0) {
+      return null;
+    }
+
+    let currentIndex = 0;
+    let currentNode = this.head;
+
+    while (currentNode != null) {
+      this.#verifyNode(currentNode);
+      if (currentIndex === index) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+      currentIndex += 1;
+    }
+
+    return null;
   }
 
   append(value) {
@@ -41,6 +91,7 @@ class LinkList {
     }
 
     currentNode.next = new Node(value);
+    this.#updateTail(currentNode.next);
   }
 
   prepend(value) {
@@ -74,13 +125,12 @@ const test = function test() {
   linkList.append("banana");
   linkList.append("lemon");
   printLinkList(linkList);
-  console.log(linkList.size);
   console.log('');
   linkList.prepend("strawberry");
   linkList.prepend("blueberry");
   linkList.prepend("cranberry");
+  linkList.append("chocolate");
   printLinkList(linkList);
-  console.log(linkList.size);
 }
 
 
