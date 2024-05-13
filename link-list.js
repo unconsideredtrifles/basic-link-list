@@ -240,21 +240,3 @@ const printLinkList = function printLinkList(linkList) {
   }
   console.log('');
 }
-
-
-const test = function test() {
-  let linkList = new LinkList();
-  linkList.append("apple");
-  linkList.append("grape");
-  linkList.append("banana");
-  linkList.append("lemon");
-  printLinkList(linkList);
-  linkList.prepend("strawberry");
-  linkList.prepend("blueberry");
-  linkList.prepend("cranberry");
-  linkList.append("chocolate");
-  printLinkList(linkList);
-}
-
-
-test();
