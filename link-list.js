@@ -115,6 +115,7 @@ const printLinkList = function printLinkList(linkList) {
     console.log(currentNode.value);
     currentNode = currentNode.next;
   }
+  console.log('');
 }
 
 
@@ -125,7 +126,6 @@ const test = function test() {
   linkList.append("banana");
   linkList.append("lemon");
   printLinkList(linkList);
-  console.log('');
   linkList.prepend("strawberry");
   linkList.prepend("blueberry");
   linkList.prepend("cranberry");
