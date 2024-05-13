@@ -166,6 +166,61 @@ class LinkList {
     }
   }
 
+  insertAt(value, index) {
+    if (this.head === null && index === 0) {
+      let nodeToInsert = new Node(value);
+      this.#head = nodeToInsert;
+      this.#tail = nodeToInsert;
+      return;
+    }
+
+    let currentIndex = 0;
+    let prevNode = null;
+    let currentNode = this.head;
+
+    while (currentNode != null) {
+      if (index === currentIndex) {
+        let nodeToInsert = new Node(value, currentNode);
+        if (prevNode !== null) {
+          prevNode.next = nodeToInsert;
+        }
+        if (currentNode === this.#head) {
+          this.#head = nodeToInsert;
+        }
+        return;
+      }
+
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      this.#verifyNode(currentNode);
+      currentIndex += 1;
+    }
+  }
+
+  removeAt(index) {
+    let currentIndex = 0;
+    let prevNode = null;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (index === currentIndex) {
+        if (prevNode !== null) {
+          prevNode.next = currentNode.next;
+        }
+        if (this.#head === currentNode) {
+          this.#head = currentNode.next;
+        }
+        if (this.#tail === currentNode) {
+          this.#tail = prevNode;
+        }
+      }
+
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      this.#verifyNode(currentNode);
+      currentIndex += 1;
+    }
+  }
+
 };
 
 
