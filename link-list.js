@@ -78,6 +78,48 @@ class LinkList {
     return null;
   }
 
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      this.#verifyNode(currentNode);
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.next; 
+    }
+
+    return false;
+  }
+
+  find(value) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+    while (currentNode != null) {
+      this.#verifyNode(currentNode);
+      if (currentNode.value === value) {
+        return currentIndex;
+      }
+      currentNode = currentNode.next;
+      currentIndex += 1;
+    }
+
+    return null;
+  }
+
+  toString() {
+    if (this.head === null) {
+      return '[ Empty Link List ]';
+    }
+
+    let strRepr = '';
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      strRepr += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.next;
+    }
+    return strRepr + 'null';
+  }
+
   append(value) {
     if (this.head === null) {
       this.head = new Node(value);
@@ -98,6 +140,23 @@ class LinkList {
     let nextNode = this.head;
     this.head = new Node(value, nextNode);
   }
+
+  pop() {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      this.#verifyNode(currentNode);
+      if (currentNode.next === this.#tail) {
+        currentNode.next = null;
+        this.#tail = currentNode;
+        break;
+      } else if (currentNode === this.#tail) {
+        /* first node being the only node and first node isn't null */
+        this.head = null;
+      }
+      currentNode = currentNode.next;
+    }
+  }
+
 };
 
 
