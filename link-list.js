@@ -2,23 +2,32 @@ import { hasOwnProp, noop } from './util/helpers.js';
 
 
 class LinkList {
+  #head;
   #tail;
 
   constructor(head = null) {
     this.#verifyNode(head);
-    this.head = head;
+    this.#head = head;
     this.#initTail();
   }
 
   get size() {
     let itemCount = 0;
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while(currentNode !== null) {
       this.#verifyNode(currentNode);
       itemCount += 1;
       currentNode = currentNode.next;
     }
     return itemCount;
+  }
+
+  get head() {
+    return this.#head;
+  }
+
+  set head(value) {
+    noop();
   }
 
   get tail() {
@@ -30,12 +39,12 @@ class LinkList {
   }
 
   #initTail() {
-    if (this.head === null) {
+    if (this.#head === null) {
       this.#tail = null;
       return;
     }
 
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode.next !== null) {
       currentNode = currentNode.next;
       this.#verifyNode(currentNode);
@@ -64,7 +73,7 @@ class LinkList {
     }
 
     let currentIndex = 0;
-    let currentNode = this.head;
+    let currentNode = this.#head;
 
     while (currentNode !== null) {
       this.#verifyNode(currentNode);
@@ -79,7 +88,7 @@ class LinkList {
   }
 
   contains(value) {
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode !== null) {
       this.#verifyNode(currentNode);
       if (currentNode.value === value) {
@@ -93,7 +102,7 @@ class LinkList {
 
   find(value) {
     let currentIndex = 0;
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode != null) {
       this.#verifyNode(currentNode);
       if (currentNode.value === value) {
@@ -107,12 +116,12 @@ class LinkList {
   }
 
   toString() {
-    if (this.head === null) {
+    if (this.#head === null) {
       return '[ Empty Link List ]';
     }
 
     let strRepr = '';
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode !== null) {
       strRepr += `( ${currentNode.value} ) -> `;
       currentNode = currentNode.next;
@@ -121,12 +130,12 @@ class LinkList {
   }
 
   append(value) {
-    if (this.head === null) {
-      this.head = new Node(value);
+    if (this.#head === null) {
+      this.#head = new Node(value);
       return;
     }
 
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode.next !== null) {
       currentNode = currentNode.next;
       this.#verifyNode(currentNode);
@@ -137,12 +146,12 @@ class LinkList {
   }
 
   prepend(value) {
-    let nextNode = this.head;
-    this.head = new Node(value, nextNode);
+    let nextNode = this.#head;
+    this.#head = new Node(value, nextNode);
   }
 
   pop() {
-    let currentNode = this.head;
+    let currentNode = this.#head;
     while (currentNode !== null) {
       this.#verifyNode(currentNode);
       if (currentNode.next === this.#tail) {
@@ -151,7 +160,7 @@ class LinkList {
         break;
       } else if (currentNode === this.#tail) {
         /* first node being the only node and first node isn't null */
-        this.head = null;
+        this.#head = null;
       }
       currentNode = currentNode.next;
     }
