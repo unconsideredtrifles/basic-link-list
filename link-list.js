@@ -1,4 +1,4 @@
-import { hasOwnProp, noop } from './util/helpers.js';
+import { hasOwnProp, noop, objToStr } from './util/helpers.js';
 
 
 class LinkList {
@@ -123,7 +123,7 @@ class LinkList {
     let strRepr = '';
     let currentNode = this.#head;
     while (currentNode !== null) {
-      strRepr += `( ${currentNode.value} ) -> `;
+      strRepr += `( ${objToStr(currentNode.value)} ) -> `;
       currentNode = currentNode.next;
     }
     return strRepr + 'null';
