@@ -241,6 +241,7 @@ const printLinkList = function printLinkList(linkList) {
   console.log('');
 }
 
+
 export {
   LinkList,   
   Node
